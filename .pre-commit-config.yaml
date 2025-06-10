@@ -1,0 +1,16 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+-   repo: local
+    hooks:
+    -   id: hatch-check
+        name: hatch-check
+        stages: [pre-commit]
+        language: system
+        entry: hatch run check
+        types: [python]
+        pass_filenames: false

@@ -1,0 +1,64 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bbarwik-ai-tools"
+dynamic = ["version"]
+description = "A collection of AI CLI tools which I use in my workspaces."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [
+    { name = "Bartosz Barwikowski", email = "bbarwik@gmail.com" },
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "typer[all]>=0.9.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/bbarwik-workspace/ai-tools"
+Issues = "https://github.com/bbarwik-workspace/ai-tools/issues"
+
+[project.scripts]
+bbarwik-ai-tools = "bbarwik_ai_tools.cli:app"
+
+[tool.hatch.version]
+path = "src/bbarwik_ai_tools/__init__.py"
+
+[tool.hatch.envs.default]
+dependencies = [
+    "pytest",
+    "pytest-cov",
+    "ruff",
+    "pre-commit",
+]
+
+[tool.hatch.envs.default.scripts]
+test = "pytest"
+test-cov = "pytest --cov-report=term-missing --cov=src/bbarwik_ai_tools"
+lint = "ruff check ."
+format = "ruff format ."
+check = [
+    "lint",
+    "format",
+    "test",
+]
+
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "C4", "B", "A", "RUF"]
+
+[tool.ruff.format]
+quote-style = "double"
